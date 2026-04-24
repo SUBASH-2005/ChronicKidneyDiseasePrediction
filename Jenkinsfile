@@ -33,3 +33,6 @@ pipeline {
                 bat 'docker run -d -p 8501:8501 ckd-app'
             }
         }
+
+    }
+}
