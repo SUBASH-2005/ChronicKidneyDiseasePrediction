@@ -4,12 +4,6 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
-            steps {
-                git 'https://github.com/SUBASH-2005/ChronicKidneyDiseasePrediction.git'
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 bat 'pip install -r requirements.txt'
@@ -30,7 +24,8 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                bat 'docker run -d -p 8501:8501 ckd-app'
+                bat 'docker rm -f ckd-container || exit 0'
+                bat 'docker run -d -p 8501:8501 --name ckd-container ckd-app'
             }
         }
 
